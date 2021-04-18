@@ -13,7 +13,7 @@ class MathCalculator{
     }
 
     static function doSomething(){
-//        $this->factorial();   // can't call not static method
+//        $this->factorial();   // can't call not-static method
         echo self::$name;   // calling static property
         self::fibonacci(200);   // calling static method by self:: keyword
         echo "Doing something\n";
@@ -23,6 +23,7 @@ class MathCalculator{
     public function factorial($n){
         $this->fibonacci($n);   // calling static method in non-static method
         self::fibonacci(420); // calling static method in non-static method
+//        echo $this->name;   // can't call static property using $this keyword
         echo "From non-static method ". self::$name; // calling static property
         echo "Factorial of {$n}\n";
     }
