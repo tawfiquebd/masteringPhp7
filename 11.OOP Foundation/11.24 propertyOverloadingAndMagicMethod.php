@@ -41,6 +41,7 @@ class MotorCycle{
 //        echo $this->$name;       // $this->displacement // private property accessing
 //    }
 
+    // __get() will be called/revoke when private inaccessible property try to access
     function __get($name){
         echo $this->parameter[$name];       // $this->parameter['displacement']
     }
@@ -51,6 +52,7 @@ class MotorCycle{
     }
 
     // __isset()    magic method    // checking if the parameter is available or not
+    // __isset() will be called when a property will be check via isset() function
     function __isset($name){
         if(!isset($this->parameter[$name])){
             echo "{$name} is not found\n";
