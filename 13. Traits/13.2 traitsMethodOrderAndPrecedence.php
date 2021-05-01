@@ -6,6 +6,7 @@ trait NumberSeriesOne{
 
     function numberSeriesA(){
         echo "Number series A\n";
+        parent::numberSeriesA();    // calling parent class method means SomeClass method
     }
 
     function numberSeriesB(){
@@ -13,7 +14,7 @@ trait NumberSeriesOne{
     }
 }
 
-class SomeClass{
+class SomeClass{    // Its a parent class of its child class and traits
     function numberSeriesA(){
         echo "Printing Number series A\n";
     }
