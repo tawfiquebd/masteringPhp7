@@ -1,6 +1,6 @@
 <?php
 
-// Solid - Liskov substitution principle (LSP) another example 2
+// another example 2
 
 class Shape{
     function calculateArea(){}
