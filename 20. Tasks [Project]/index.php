@@ -27,34 +27,34 @@
     <p>This is a sample project for managing our daily tasks. We're going to use HTML, CSS, PHP, JavaScript and MySQL
         for this project</p>
 
-        <h4>Complete Tasks</h4>
-        <table>
-            <thead>
-            <tr>
-                <th></th>
-                <th>Id</th>
-                <th>Task</th>
-                <th>Date</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input class="label-inline" type="checkbox" value=""></td>
-                    <td>1</td>
-                    <td>Go to university</td>
-                    <td>7 jun 2021</td>
-                    <td><a class="delete" href='#'>Delete</a> | <a
-                            class="incomplete"  href='#'>Mark Incomplete</a>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <p>...</p>
-
-        <p>No Task Found</p>
-        <h4>Upcoming Tasks</h4>
+<!--        <h4>Complete Tasks</h4>-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th></th>-->
+<!--                <th>Id</th>-->
+<!--                <th>Task</th>-->
+<!--                <th>Date</th>-->
+<!--                <th>Action</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--                <tr>-->
+<!--                    <td><input class="label-inline" type="checkbox" value=""></td>-->
+<!--                    <td>1</td>-->
+<!--                    <td>Go to university</td>-->
+<!--                    <td>7 jun 2021</td>-->
+<!--                    <td><a class="delete" href='#'>Delete</a> | <a-->
+<!--                            class="incomplete"  href='#'>Mark Incomplete</a>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!---->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--        <p>...</p>-->
+<!---->
+<!--        <p>No Task Found</p>-->
+        <h4>All Tasks</h4>
         <form action="" method="POST">
             <table>
                 <thead>
@@ -72,7 +72,8 @@
                         <td>1</td>
                         <td>Go to shopping</td>
                         <td>6 jun 2021</td>
-                        <td><a class="delete" href='#'>Delete</a> | <a
+                        <td><a class="delete" href='#'>Delete</a> |
+                            <a class="edit" href='#'>Edit</a> | <a
                                 class="complete"  href='#'>Complete</a></td>
                     </tr>
 
@@ -88,11 +89,17 @@
 
     <p>...</p>
     <h4>Add Tasks</h4>
-    <form method="post" action="">
+    <form method="post" action="tasks.php">
         <fieldset>
-
+            <?php
+                $added = $_GET['added'] ?? '';
+                if($added){
+                    echo "<p>Task Added Successfully</p>";
+                }
+            ?>
             <label for="task">Task</label>
             <input type="text" placeholder="Task Details" id="task" name="task">
+
             <label for="date">Date</label>
             <input type="text" placeholder="Task Date" id="date" name="date">
 
@@ -102,20 +109,6 @@
     </form>
 </div>
 
-<form action="tasks.php" method="post" id="completeform">
-    <input type="hidden" name="action" value="complete">
-    <input type="hidden" id="taskid" name="taskid">
-</form>
-
-<form action="tasks.php" method="post" id="deleteform">
-    <input type="hidden" name="action" value="delete">
-    <input type="hidden" id="dtaskid" name="taskid">
-</form>
-
-<form action="tasks.php" method="post" id="incompleteform">
-    <input type="hidden" name="action" value="incomplete">
-    <input type="hidden" id="itaskid" name="taskid">
-</form>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 </html>
