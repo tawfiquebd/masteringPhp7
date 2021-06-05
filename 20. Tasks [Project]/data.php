@@ -36,4 +36,8 @@ else{
 
     // Delete tables all data
 //    echo mysqli_query($connection, "TRUNCATE TABLE tasks");
+
+    // Good Practice is always close your database connection
+    mysqli_close($connection);
+
 }
