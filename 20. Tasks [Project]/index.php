@@ -8,8 +8,12 @@
     }
 
     // Get all records
-    $query = "SELECT * FROM tasks ORDER BY id ASC"; // default is: ORDER BY id ASC
+    $query = "SELECT * FROM tasks WHERE complete = 0 ORDER BY id ASC"; // default is: ORDER BY id ASC
     $result = mysqli_query($connection, $query);
+
+    // Get completed records only
+    $completeTaskQuery = "SELECT * FROM tasks WHERE complete = 1";
+    $completeTaskResult = mysqli_query($connection, $completeTaskQuery);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,34 +43,49 @@
     <p>This is a sample project for managing our daily tasks. We're going to use HTML, CSS, PHP, JavaScript and MySQL
         for this project</p>
 
-<!--        <h4>Complete Tasks</h4>-->
-<!--        <table>-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th></th>-->
-<!--                <th>Id</th>-->
-<!--                <th>Task</th>-->
-<!--                <th>Date</th>-->
-<!--                <th>Action</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--                <tr>-->
-<!--                    <td><input class="label-inline" type="checkbox" value=""></td>-->
-<!--                    <td>1</td>-->
-<!--                    <td>Go to university</td>-->
-<!--                    <td>7 jun 2021</td>-->
-<!--                    <td><a class="delete" href='#'>Delete</a> | <a-->
-<!--                            class="incomplete"  href='#'>Mark Incomplete</a>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!---->
-<!--            </tbody>-->
-<!--        </table>-->
-<!--        <p>...</p>-->
-<!---->
-<!--        <p>No Task Found</p>-->
-        <h4>All Tasks</h4>
+    <?php
+        if(mysqli_num_rows($completeTaskResult) > 0){ ?>
+
+        <h4>Complete Tasks</h4>
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                <?php
+                    while($cdata = mysqli_fetch_assoc($completeTaskResult)){
+                        $timestamp = strtotime($cdata['date']);
+                        $date = date("jS M, Y", $timestamp);
+                ?>
+                <tr>
+                    <td><input class="label-inline" type="checkbox" value="<?php echo $cdata['id']; ?>"> </td>
+                    <td><?php echo $cdata['id']; ?></td>
+                    <td><?php echo $cdata['task']; ?></td>
+                    <td><?php echo $date; ?></td>
+                    <td><a class="delete" href='#'>Delete</a></td>
+                </tr>
+                <?php
+
+                    }
+
+                ?>
+            </tbody>
+        </table>
+        <p>...</p>
+
+    <?php
+
+        }
+
+    ?>
+
+        <h4>Upcoming Tasks</h4>
         <?php
             if(mysqli_num_rows($result) == 0){
                 echo "<p>No Task Found</p>";
@@ -101,6 +120,7 @@
                     </tr>
                 <?php
                     }
+                    mysqli_close($connection);
                 ?>
                 </tbody>
             </table>
