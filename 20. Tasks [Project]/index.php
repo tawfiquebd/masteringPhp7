@@ -88,13 +88,15 @@
     ?>
 
         <h4>Upcoming Tasks</h4>
+
         <?php
             if(mysqli_num_rows($result) == 0){
                 echo "<p>No Task Found</p>";
             }
             else{
             ?>
-        <form action="" method="POST">
+        <form action="tasks.php" method="POST">
+
             <table>
                 <thead>
                 <tr>
@@ -113,7 +115,7 @@
                 ?>
 
                     <tr>
-                        <td><input class="label-inline" type="checkbox" value="<?php echo $data['id']; ?>"></td>
+                        <td><input name="taskids[]" class="label-inline" type="checkbox" value="<?php echo $data['id']; ?>"></td>
                         <td><?php echo $data['id']; ?></td>
                         <td><?php echo $data['task']; ?></td>
                         <td><?php echo $date; ?></td>
@@ -202,6 +204,16 @@
                var id = $(this).data("taskid");
                $("#itaskid").val(id);
                $("#incompleteform").submit();
+            });
+        });
+
+        $(document).ready(function(){
+            $("#bulksubmit").on('click',function(){
+                if($("#action").val() == 'bulkdelete'){
+                    if(!confirm("Are you sure to delete?")){
+                        return false;
+                    }
+                }
             });
         });
 
