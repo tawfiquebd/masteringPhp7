@@ -68,7 +68,9 @@
                     <td><?php echo $cdata['id']; ?></td>
                     <td><?php echo $cdata['task']; ?></td>
                     <td><?php echo $date; ?></td>
-                    <td><a class="delete" href='#'>Delete</a></td>
+                    <td><a class="delete" href='#'>Delete</a> |
+                        <a class="incomplete" data-taskid="<?php echo $cdata['id']; ?>" href='#'>Mark Incomplete</a>
+                    </td>
                 </tr>
                 <?php
 
@@ -116,7 +118,7 @@
                         <td><?php echo $data['task']; ?></td>
                         <td><?php echo $date; ?></td>
                         <td><a class="delete" href='#'>Delete</a> |
-                            <a class="complete"  href='#'>Complete</a></td>
+                            <a class="complete" data-taskid="<?php echo $data['id']; ?>"  href='#'>Complete</a></td>
                     </tr>
                 <?php
                     }
@@ -156,6 +158,51 @@
     </form>
 </div>
 
+<form action="tasks.php" method="post" id="completeform">
+    <input type="hidden" name="action" value="complete">
+    <input type="hidden" id="taskid" name="taskid">
+</form>
+
+<form action="tasks.php" method="post" id="deleteform">
+    <input type="hidden" name="action" value="delete">
+    <input type="hidden" id="dtaskid" name="taskid">
+</form>
+
+<form action="tasks.php" method="post" id="incompleteform">
+    <input type="hidden" name="action" value="incomplete">
+    <input type="hidden" id="itaskid" name="taskid">
+</form>
+
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<script>
+    ;(function($){
+
+        $(document).ready(function(){
+            $(".complete").on('click',function(){
+               var id = $(this).data("taskid");
+               $("#taskid").val(id);
+               $("#completeform").submit();
+            });
+        });
+
+        $(document).ready(function(){
+            $(".delete").on('click',function(){
+               var id = $(this).data("taskid");
+               $("#dtaskid").val(id);
+               $("#deleteform").submit();
+            });
+        });
+
+        $(document).ready(function(){
+            $(".incomplete").on('click',function(){
+               var id = $(this).data("taskid");
+               $("#itaskid").val(id);
+               $("#incompleteform").submit();
+            });
+        });
+
+    })(jQuery);
+</script>
 </html>
