@@ -43,6 +43,14 @@ else {
             }
             header("Location: index.php");
         }
+        else if('delete' == $action){
+            $taskid = $_POST['taskid'];
+            if($taskid){
+                $query = "DELETE FROM tasks WHERE id = {$taskid} LIMIT 1";
+                mysqli_query($connection, $query);
+            }
+            header("Location: index.php");
+        }
     }
 }
 mysqli_close($connection);

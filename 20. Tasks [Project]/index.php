@@ -68,7 +68,7 @@
                     <td><?php echo $cdata['id']; ?></td>
                     <td><?php echo $cdata['task']; ?></td>
                     <td><?php echo $date; ?></td>
-                    <td><a class="delete" href='#'>Delete</a> |
+                    <td><a class="delete" data-taskid="<?php echo $cdata['id']; ?>" href='#'>Delete</a> |
                         <a class="incomplete" data-taskid="<?php echo $cdata['id']; ?>" href='#'>Mark Incomplete</a>
                     </td>
                 </tr>
@@ -117,7 +117,7 @@
                         <td><?php echo $data['id']; ?></td>
                         <td><?php echo $data['task']; ?></td>
                         <td><?php echo $date; ?></td>
-                        <td><a class="delete" href='#'>Delete</a> |
+                        <td><a class="delete" data-taskid="<?php echo $data['id']; ?>" href='#'>Delete</a> |
                             <a class="complete" data-taskid="<?php echo $data['id']; ?>"  href='#'>Complete</a></td>
                     </tr>
                 <?php
@@ -189,9 +189,11 @@
 
         $(document).ready(function(){
             $(".delete").on('click',function(){
-               var id = $(this).data("taskid");
-               $("#dtaskid").val(id);
-               $("#deleteform").submit();
+                if(confirm("Are you sure to delete this task?")){
+                   var id = $(this).data("taskid");
+                   $("#dtaskid").val(id);
+                   $("#deleteform").submit();
+                }
             });
         });
 
