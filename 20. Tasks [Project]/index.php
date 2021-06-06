@@ -1,4 +1,16 @@
+<?php
+    include_once 'config.php';
+    // Database connection
+    $connection = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 
+    if (!$connection){
+        throw new Exception("Failed to connect database");
+    }
+
+    // Get all records
+    $query = "SELECT * FROM tasks ORDER BY id ASC"; // default is: ORDER BY id ASC
+    $result = mysqli_query($connection, $query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +67,12 @@
 <!---->
 <!--        <p>No Task Found</p>-->
         <h4>All Tasks</h4>
+        <?php
+            if(mysqli_num_rows($result) == 0){
+                echo "<p>No Task Found</p>";
+            }
+            else{
+            ?>
         <form action="" method="POST">
             <table>
                 <thead>
@@ -67,16 +85,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input name="" class="label-inline" type="checkbox" value=""></td>
-                        <td>1</td>
-                        <td>Go to shopping</td>
-                        <td>6 jun 2021</td>
-                        <td><a class="delete" href='#'>Delete</a> |
-                            <a class="edit" href='#'>Edit</a> | <a
-                                class="complete"  href='#'>Complete</a></td>
-                    </tr>
+                <?php
+                    while($data = mysqli_fetch_assoc($result)){
+                    $timestamp = strtotime($data['date']);  // converted to timestamp format
+                    $date = date("jS M, Y", $timestamp);    // S is suffix here
+                ?>
 
+                    <tr>
+                        <td><input class="label-inline" type="checkbox" value="<?php echo $data['id']; ?>"></td>
+                        <td><?php echo $data['id']; ?></td>
+                        <td><?php echo $data['task']; ?></td>
+                        <td><?php echo $date; ?></td>
+                        <td><a class="delete" href='#'>Delete</a> |
+                            <a class="complete"  href='#'>Complete</a></td>
+                    </tr>
+                <?php
+                    }
+                ?>
                 </tbody>
             </table>
             <select id="action" name="action" >
@@ -86,7 +111,9 @@
             </select>
             <input class="button-primary" id="bulksubmit" type="submit" value="Submit">
         </form>
-
+        <?php
+            }
+        ?>
     <p>...</p>
     <h4>Add Tasks</h4>
     <form method="post" action="tasks.php">
