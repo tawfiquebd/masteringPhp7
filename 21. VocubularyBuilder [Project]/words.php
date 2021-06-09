@@ -1,9 +1,12 @@
 <?php
     session_start();
+    require_once 'functions.php';
+
     $_user_id = $_SESSION['id'] ?? 0;
     if(!$_user_id){
         header("Location: index.php");
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,10 +66,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Fine</td>
-                    <td>Everything is good </td>
-                </tr>
+                <?php
+                $words = getWords($_user_id);
+                if(count($words) > 0){
+                    $length = count($words);
+                    for($i = 0; $i < $length; $i++){ ?>
+
+                    <tr>
+                        <td><?php echo $words[$i]['word']; ?></td>
+                        <td><?php echo $words[$i]['meaning']; ?></td>
+                    </tr>
+                <?php
+                    }
+                }
+                ?>
+
                 </tbody>
             </table>
         </div>
