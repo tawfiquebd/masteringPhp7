@@ -26,9 +26,9 @@
             <div class="formaction">
                 <a href="#" id="login">Login</a> | <a href="#" id="register">Register Account</a>
             </div>
-            <div class="formc">
+            <div id="form01" class="formc">
                 <form method="post" action="tasks.php">
-                    <h3>Register</h3>
+                    <h3>Login</h3>
                     <?php
                     $status = $_GET['status'] ?? 0;
                     if($status){
@@ -42,7 +42,7 @@
                         <input type="password" placeholder="Password" id="password" name="password">
 
                         <input class="button-primary" type="submit" value="Submit">
-                        <input type="hidden" name="action" value="register">
+                        <input type="hidden" name="action" id="action" value="login">
                     </fieldset>
                 </form>
             </div>
