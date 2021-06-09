@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'config.php';
 
 $action = $_POST['action'] ?? '';
@@ -38,8 +39,10 @@ else {// user registration
             $result = mysqli_query($connection, $query);
             if(mysqli_num_rows($result) > 0){
                 $data = mysqli_fetch_assoc($result);
+                $_id = $data['id'];
                 $_password = $data['password']; // db password hash
                 if(password_verify($password, $_password)){
+                    $_SESSION['id'] = $_id;
                     header("Location: words.php");
                     die();
                 }
