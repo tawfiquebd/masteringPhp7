@@ -22,7 +22,7 @@
 <div class="sidebar">
     <h4>Menu</h4>
     <ul class="menu">
-        <li><a href="words.php" class="menu-item" data-target="words">All Words</a></li>
+        <li><a href="#" class="menu-item" data-target="words">All Words</a></li>
         <li><a href="#" class="menu-item" data-target="wordform">Add New Word</a></li>
         <li><a href="logout.php">Logout</a></li>
     </ul>
@@ -41,9 +41,6 @@
                         <option value="A">A#</option>
                         <option value="B">B#</option>
                         <option value="C">C#</option>
-                        <option value="D">D#</option>
-                        <option value="N">N#</option>
-                        <option value="M">M#</option>
                     </select>
 
                 </div>
@@ -56,40 +53,45 @@
                 </form>
             </div>
         </div>
+
+        <div class="row">
+            <table class="words" >
+                <thead>
+                <tr>
+                    <th width="20%">Word</th>
+                    <th>Definition</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Fine</td>
+                    <td>Everything is good </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <hr>
 
-    <table class="words" >
-        <thead>
-        <tr>
-            <th width="20%">Word</th>
-            <th>Definition</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>tewrewr</td>
-                <td>dsfsfsf></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="formc helement" id="wordform" style="display: none;">
+        <form action="tasks.php" method="post">
+            <h4>Add New Word</h4>
+            <fieldset>
+                <label for="word">Word</label>
+                <input type="text" name="word" placeholder="Word" id="word">
 
-<div class="formc helement" id="wordform" style="display: none;">
-    <form action="tasks.php" method="post">
-        <h4>Add New Word</h4>
-        <fieldset>
-            <label for="word">Word</label>
-            <input type="text" name="word" placeholder="Word" id="word">
-            <label for="Meaning">Meaning</label>
-            <textarea name="meaning" placeholder="Meaning" id="Meaning" style="height:100px" rows="10"></textarea>
-            <input type="hidden" name="action" value="addword">
-            <input class="button-primary" type="submit" value="Add Word">
-        </fieldset>
-    </form>
-</div>
+                <label for="Meaning">Meaning</label>
+                <textarea name="meaning" placeholder="Meaning" id="Meaning" style="height:100px" rows="10"></textarea>
+
+                <input type="hidden" name="action" value="addword">
+                <input class="button-primary" type="submit" value="Add Word">
+            </fieldset>
+        </form>
+    </div>
 
 </div>
+
+
 </body>
 <script src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="assets/js/script.js?1"></script>
