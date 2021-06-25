@@ -42,8 +42,17 @@
     // process/send data to server by ajax
     function sendData(){
         let xhr = new XMLHttpRequest();     //  javascript object
-        // server side request to data.php
-        xhr.open("GET", "data.php?foo=bar&hello=world", true);   // method httpVerb: GET // true for asynchronous mode
+        // server side request to data.php // GET method
+        // method httpVerb: GET // true for asynchronous mode
+        // xhr.open("GET", "data.php?foo=bar&hello=world", true);
+
+        // POST method
+        xhr.open("POST", "data.php", true);
+        // content type
+        xhr.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+        );
         // get/check server response
         xhr.onreadystatechange = function(){
             // request complete = 4
@@ -57,7 +66,10 @@
             }
         }
 
-        xhr.send();
+        // get method
+        // xhr.send();
+        // post method
+        xhr.send("foo=bar&hello=world"); // passing data
     }
 
     document.getElementById('send').addEventListener('click',function(){
