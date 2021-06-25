@@ -45,9 +45,12 @@
         // server side request to data.php // GET method
         // method httpVerb: GET // true for asynchronous mode
         // xhr.open("GET", "data.php?foo=bar&hello=world", true);
-
         // POST method
-        xhr.open("POST", "data.php", true);
+        // xhr.open("POST", "data.php", true);
+        // PUT method
+        xhr.open("PUT", "data.php?id=12&name=NewName&email=NewEmail", true);
+        // DELETE method
+        // xhr.open("DELETE", "data.php?id=22", true);
         // content type
         xhr.setRequestHeader(
             "Content-Type",
@@ -69,7 +72,10 @@
         // get method
         // xhr.send();
         // post method
-        xhr.send("foo=bar&hello=world"); // passing data
+        // xhr.send("foo=bar&hello=world"); // passing data
+
+        // for PUT/DELETE
+        xhr.send();
     }
 
     document.getElementById('send').addEventListener('click',function(){
