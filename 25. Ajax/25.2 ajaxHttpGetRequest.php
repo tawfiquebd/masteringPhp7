@@ -41,14 +41,19 @@
 
     // process/send data to server by ajax
     function sendData(){
+        let params = {
+            "key1":"Value 1",
+            "key2":"Value 2"
+        }
+        let queryString = formatParams(params);
         let xhr = new XMLHttpRequest();     //  javascript object
         // server side request to data.php // GET method
         // method httpVerb: GET // true for asynchronous mode
         // xhr.open("GET", "data.php?foo=bar&hello=world", true);
         // POST method
         // xhr.open("POST", "data.php", true);
-        // PUT method
-        xhr.open("PUT", "data.php?id=12&name=NewName&email=NewEmail", true);
+
+        xhr.open("GET", "data.php?"+queryString, true);
         // DELETE method
         // xhr.open("DELETE", "data.php?id=22", true);
         // content type
@@ -78,8 +83,15 @@
         xhr.send();
     }
 
+    function formatParams(data){
+        return Object.keys(data).map(function(key){
+            return key + "=" + encodeURIComponent(data[key])
+        }).join('&');
+    }
+
     document.getElementById('send').addEventListener('click',function(){
         sendData();
+
     });
 </script>
 </html>
