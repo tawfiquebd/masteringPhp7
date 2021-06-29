@@ -84,9 +84,12 @@
     }
 
     function formatParams(data){
-        return Object.keys(data).map(function(key){
-            return key + "=" + encodeURIComponent(data[key])
-        }).join('&');
+        // convert query string
+        return new URLSearchParams(data).toString();
+
+        // return Object.keys(data).map(function(key){
+        //     return key + "=" + encodeURIComponent(data[key])
+        // }).join('&');
     }
 
     document.getElementById('send').addEventListener('click',function(){
