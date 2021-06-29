@@ -92,9 +92,33 @@
         // }).join('&');
     }
 
-    document.getElementById('send').addEventListener('click',function(){
-        sendData();
+    // send data using jQuery ajax
+    function sendDataUsingJQuery(){
+        let params = {
+            "key1":"Value 1",
+            "key2":"Value 2",
+            "key3":"Value 3 & More",
+            "foo":"Bar",
+            "sender":"jQuery"
+        }
 
+        $.ajax({
+            "method":"POST",
+            "url":"data.php",
+            "data":params
+        }).done(function(response){
+            $('#result').html(response);
+        });
+
+        // another simple way   // post/get method
+        // $.post("data.php",params,function(response){
+        //     $("#result").html(response);
+        // })
+    }
+
+    document.getElementById('send').addEventListener('click',function(){
+        // sendData();
+        sendDataUsingJQuery();
     });
 </script>
 </html>

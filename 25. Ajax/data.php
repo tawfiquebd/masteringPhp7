@@ -5,9 +5,9 @@
 // FOR GET ;
 //$data = $_GET;
 // FOR POST ;
-//$data = $_POST;
+$data = $_POST;
 // FOR DELETE/PUT ;
-$data = $_GET;
+//$data = $_GET;
 
 $data['result'] = 'success';
 // get method type
